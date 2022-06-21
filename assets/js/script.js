@@ -2,6 +2,7 @@
 var startButton = document.querySelector("#start-button");
  var questionDisplay = document.querySelector("#main-header");
  var answerDisplayEl = document.querySelector("#answers");
+ var nextButton = document.querySelector('next-btn');
  var questionNum = 0;
  
  var questionObject = [
@@ -67,31 +68,43 @@ var startButton = document.querySelector("#start-button");
  }
 
 var nextQuestion = function() {
-  show(questionObject[questionNum]);
-  
+    reset()
+    show(questionObject[questionNum]);
+    
 }
 
 var show = function(question) {
     questionDisplay.innerText = question.question;
-    question.answers.forEach(answer => {
-        var answerButton = document.createElement("button");
-        answerButton.innerHTML = answer.text;
-        if(answer.correct) {
-            answerButton.dataset.correct = answer.correct;
+    question.answers.forEach(answers => {
+        var answerButton = document.createElement('button');
+        answerButton.innerHTML = answers.text;
+        if(answers.correct) {
+            answerButton.dataset.correct = answers.correct;
         }
-        startButton.classList.add('button');
+        answerButton.classList.add('button');
         
-        startButton.addEventListener("click", select);
+        answerButton.addEventListener("click", select);
         answerDisplayEl.appendChild(answerButton);
-
-
+        
+        
     })
+    
 }
 
-var select = function(){
+
+
+
+var select = function(e){
 
 }
 
+var reset = function(){
+    
+    while (answerDisplayEl.firstChild) {
+        answerDisplayEl.removeChild(answerDisplayEl.firstChild);
+    }
+
+};
 
 
 
