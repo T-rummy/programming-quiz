@@ -1,36 +1,43 @@
 // var answerCounter = 0;
 var startButton = document.querySelector("#start-button");
  var questionDisplay = document.querySelector("#main-header");
-// var answerDisplayEl = document.querySelector("#answer-options");
-
+ var answerDisplayEl = document.querySelector("#answers");
+ var questionNum = 0;
+ 
  var questionObject = [
    
  {   question: "what is a Boolean?",
-     answers: ["true", "false", "both"],
-     correct: "3"
+     answers: [{text: "true", correct: false },
+     {text: "false", correct: false },
+     {text: "both", correct: true }],
+     
  },
 
  {   question: "What does HTML stand for?",
-     answers: ["Hypertext Markup Language", 
-                 "Happy Times Meeting Lobbyists", 
-                "Hens Train Male Llamas",
-                "Hyper Test Markdown Language"],
-    correct: "1"
+     answers: [{text:"Hypertext Markup Language", correct: true}, 
+     {text:"Happy Times Meeting Lobbyists", correct: false}, 
+     {text:"Hens Train Male Llamas", correct: false},
+     {text:"Hyper Test Markdown Language", correct: false}],
 },
 {   question: "Which answer is the 'not' operator",
-    answers: ["null", "&", "Na", "!"],
-    correct: "4"
+    answers: [{text:"null", correct: false}, 
+            {text:"&", correct: false}, 
+            {text:"Na", correct: false}, 
+            {text:"!", correct: true}],
 },
 
 {   question: "Which one is not a primitive data-type in javascript",
-    answers: ["string", "float", "boolean", "number"],
-    correct: "2"
+    answers: [{text:"string", correct: false},
+            {text:"float", correct: true}, 
+            {text:"boolean", correct: false}, 
+            {text:"number", correct: false}],
 }
 ];
 
 
  var startQuiz = function() {
      nextQuestion();
+     
 // //var quizQuestionEl = document.createElement("div");
 // //quizQuestionEl.className = "questions";
 
@@ -60,7 +67,25 @@ var startButton = document.querySelector("#start-button");
  }
 
 var nextQuestion = function() {
+  show(questionObject[questionNum]);
+  
+}
 
+var show = function(question) {
+    questionDisplay.innerText = question.question;
+    question.answers.forEach(answer => {
+        var answerButton = document.createElement("button");
+        answerButton.innerHTML = answer.text;
+        if(answer.correct) {
+            answerButton.dataset.correct = answer.correct;
+        }
+        startButton.classList.add('button');
+        
+        startButton.addEventListener("click", select);
+        answerDisplayEl.appendChild(answerButton);
+
+
+    })
 }
 
 var select = function(){

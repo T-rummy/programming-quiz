@@ -45,6 +45,11 @@
     border: 1px solid black;
 }
 
+.button:hover {
+    background-color: red;
+    color: black;
+}
+
 .btn-margin {
     margin-top: 15px;
     margin-left: 10px;
